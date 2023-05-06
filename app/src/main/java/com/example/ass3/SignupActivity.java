@@ -1,6 +1,9 @@
 package com.example.ass3;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,6 +13,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class SignupActivity extends AppCompatActivity {
@@ -27,6 +35,9 @@ public class SignupActivity extends AppCompatActivity {
 
     private Spinner genderSpinner;
 
+    private FirebaseAuth mAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +51,8 @@ public class SignupActivity extends AppCompatActivity {
         addressEditText = findViewById(R.id.address);
         datePicker = findViewById(R.id.date_picker);
         genderSpinner = findViewById(R.id.gender_spinner);
+        mAuth = FirebaseAuth.getInstance();
+
 
         // Populate the gender spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -101,25 +114,27 @@ public class SignupActivity extends AppCompatActivity {
         }
         return valid;
     }
-}
 
-// Example method for Firebase Authentication
-/*
-private void createUserWithEmailAndPassword(String email, String password) {
-    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    // Sign up success, update UI with the signed-in user's information
-                    // Navigate back to LoginActivity or directly to HomeActivity
-                } else {
-                    // If sign up fails, display a message to the user.
-                    Toast.makeText(SignupActivity.this, "Registration failed.",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
+    // Example method for Firebase Authentication
+    private void createUserWithEmailAndPassword(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign up success, update UI with the signed-in user's information
+                            // Navigate back to LoginActivity
+                            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            // If sign up fails, display a message to the user.
+                            Toast.makeText(SignupActivity.this, "Registration failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 }
-*/
 
