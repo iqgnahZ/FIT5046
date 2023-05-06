@@ -1,14 +1,16 @@
 package com.example.ass3;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -16,40 +18,39 @@ public class SignupActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private EditText confirmPasswordEditText;
     private Button signUpButton;
-    private TextView loginLink;
+
+    private EditText nameEditText;
+
+    private EditText addressEditText;
+
+    private DatePicker datePicker;
+
+    private Spinner genderSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        Button dataEntryButton = findViewById(R.id.data_entry_button);
 
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
         confirmPasswordEditText = findViewById(R.id.confirmPassword);
         signUpButton = findViewById(R.id.signupButton);
-        loginLink = findViewById(R.id.loginLink);
+        nameEditText = findViewById(R.id.name);
+        addressEditText = findViewById(R.id.address);
+        datePicker = findViewById(R.id.date_picker);
+        genderSpinner = findViewById(R.id.gender_spinner);
+
+        // Populate the gender spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.gender_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(adapter);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registerUser();
-            }
-        });
-
-        loginLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Navigate back to LoginActivity
-                finish();
-            }
-        });
-
-        dataEntryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SignupActivity.this, DataEntryActivity.class);
-                startActivity(intent);
             }
         });
     }
@@ -89,6 +90,15 @@ public class SignupActivity extends AppCompatActivity {
             confirmPasswordEditText.setError(null);
         }
 
+        if (nameEditText.getText().toString().trim().isEmpty()) {
+            nameEditText.setError("Name is required");
+            valid = false;
+        }
+
+        if (addressEditText.getText().toString().trim().isEmpty()) {
+            addressEditText.setError("Address is required");
+            valid = false;
+        }
         return valid;
     }
 }
@@ -112,3 +122,4 @@ private void createUserWithEmailAndPassword(String email, String password) {
         });
 }
 */
+
