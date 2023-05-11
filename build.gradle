@@ -11,11 +11,3 @@ buildscript {
     }
 }
 
-
-allprojects {
-    repositories {
-        // Remove the following two lines
-        // google()  // Google's Maven repository
-        // mavenCentral()  // Maven Central repository
-    }
-}

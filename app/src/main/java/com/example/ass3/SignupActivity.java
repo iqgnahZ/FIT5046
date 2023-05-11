@@ -1,23 +1,30 @@
 package com.example.ass3;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SignupActivity extends AppCompatActivity {
@@ -36,6 +43,7 @@ public class SignupActivity extends AppCompatActivity {
     private Spinner genderSpinner;
 
     private FirebaseAuth mAuth;
+    private static final String TAG = "SignupActivity";
 
 
     @Override
@@ -75,7 +83,7 @@ public class SignupActivity extends AppCompatActivity {
 
         if (validateInputs(email, password, confirmPassword)) {
             // Proceed with Firebase Authentication for registration
-            // createUserWithEmailAndPassword(email, password);
+            createUserWithEmailAndPassword(email, password);
         }
     }
 
@@ -116,7 +124,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-    // Example method for Firebase Authentication
+    //Example method for Firebase Authentication
     private void createUserWithEmailAndPassword(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -124,6 +132,29 @@ public class SignupActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign up success, update UI with the signed-in user's information
+                            // Get current user
+                            FirebaseUser user = mAuth.getCurrentUser();
+
+                            // Write user's address to Firestore
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            Map<String, Object> userAddress = new HashMap<>();
+                            userAddress.put("address", addressEditText.getText().toString().trim());
+
+                            db.collection("users").document(user.getUid())
+                                    .set(userAddress)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error writing document", e);
+                                        }
+                                    });
+
                             // Navigate back to LoginActivity
                             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                             startActivity(intent);
@@ -136,5 +167,6 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 });
     }
+
 }
 

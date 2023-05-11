@@ -11,6 +11,17 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                // Use the Mapbox access token
+                username = "mapbox"
+                password = "sk.eyJ1Ijoiendhbjk4IiwiYSI6ImNsaGh0ZnZyNDAxOXYzdHFzN3RxbG9jbnQifQ.za__sC3KNtj8ubp8Z7vuVA"
+            }
+        }
     }
 }
 

@@ -26,6 +26,15 @@
         <!-- Make sure SignupActivity is declared -->
         <activity android:name=".SignupActivity"></activity>
 
+        <!-- Make sure MapActivity is declared -->
+        <activity android:name=".MapActivity" />
+
+        <!-- Mapbox access token -->
+        <meta-data
+            android:name="com.mapbox.access_token"
+            android:value="pk.eyJ1Ijoiendhbjk4IiwiYSI6ImNsaGh0OHZ6NzAxN3gzZGxnMnF5NmM4OW0ifQ.sNz1xIUNpvE-ANrmcpWIyw" />
+
+
     </application>
 
 </manifest>
