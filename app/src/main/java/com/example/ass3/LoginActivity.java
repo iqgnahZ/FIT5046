@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             // Navigate to the Map screen
-                            Intent intent = new Intent(LoginActivity.this, MapActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
                             finish(); // This will finish LoginActivity. Remove if not necessary.
                         } else {
