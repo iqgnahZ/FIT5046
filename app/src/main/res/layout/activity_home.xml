@@ -12,21 +12,82 @@
         android:orientation="vertical">
 
         <!-- New TextView for displaying weather info -->
+
+
         <TextView
             android:id="@+id/weather_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Weather info will be displayed here"
-            android:textSize="18sp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"/>
+            android:text="Weather info will be displayed here"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#FFFFFF"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="40dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp">
+
+            <ImageView
+                android:id="@+id/food_icon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/food_icon"
+                android:clickable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dietary Advice"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp">
+
+            <ImageView
+                android:id="@+id/exercise_icon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/exercise_icon"
+                android:clickable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Training Plan"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
     </LinearLayout>
+
+
 
     <!-- The navigation drawer -->
     <com.google.android.material.navigation.NavigationView

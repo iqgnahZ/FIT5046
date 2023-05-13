@@ -2,6 +2,8 @@ package api;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class WeatherResponse {
     @SerializedName("main")
     private Main main;
@@ -18,4 +20,21 @@ public class WeatherResponse {
             return temp;
         }
     }
+
+    public class Weather {
+        @SerializedName("icon")
+        private String icon;
+
+        public String getIcon() {
+            return icon;
+        }
+    }
+
+    @SerializedName("weather")
+    private List<Weather> weather;
+
+    public List<Weather> getWeather() {
+        return weather;
+    }
+
 }
