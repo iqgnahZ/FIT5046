@@ -57,17 +57,21 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.nav_map:
-                    // Replace content_frame with MapFragment
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_frame, new MapFragment())
-                            .commit();
+                    // Start MapActivity
+                    Intent intent = new Intent(this, MapActivity.class);
+                    startActivity(intent);
                     break;
                 // Handle other screen navigation here
+                case R.id.nav_record:
+                    intent = new Intent(this, WeightActivity.class);
+                    startActivity(intent);
+                    break;
             }
             // Close the navigation drawer
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
+
 
         // Begin the Retrofit code
         Retrofit retrofit = new Retrofit.Builder()
@@ -155,6 +159,21 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                // If there are fragments on the back stack, pop the stack
+                getSupportFragmentManager().popBackStack();
+            } else {
+                // If there are no fragments on the back stack, handle the back press as usual
+                super.onBackPressed();
+            }
+        }
     }
 }
 

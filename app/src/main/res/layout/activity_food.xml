@@ -12,12 +12,21 @@
         android:text="Nutrition Recommendations"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <TextView
-        android:id="@+id/content_food"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Food content will be displayed here"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+<!--    <TextView-->
+<!--        android:id="@+id/content_food"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="Day 1:\nBreakfast: Scrambled eggs with spinach and whole grain toast.\nLunch: Grilled chicken salad with vinaigrette.\nDinner: Baked salmon with quinoa and asparagus."-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/content_food"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="Day 2:\nBreakfast: Greek yogurt with mixed berries and a handful of almonds.\nLunch: Turkey wrap with veggies and hummus.\nDinner: Vegetable stir-fry with tofu and brown rices."-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />-->
+
 
 </LinearLayout>

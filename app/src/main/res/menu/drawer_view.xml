@@ -5,5 +5,8 @@
             android:id="@+id/nav_map"
             android:title="Map" />
         <!-- Add other screens here -->
+        <item
+            android:id="@+id/nav_record"
+            android:title="Record" />
     </group>
 </menu>
